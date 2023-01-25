@@ -1,4 +1,5 @@
 import 'package:apitest/models/post.dart';
+import 'package:apitest/screens/post_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -79,9 +80,30 @@ class _MyHomePageState extends State<MyHomePage> {
                     Radius.circular(10),
                   ),
                 ),
-                child: ListTile(
-                  title: Text(posts![index].title),
-                  subtitle: Text(posts![index].intro),
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text(posts![index].title),
+                      subtitle: Text(posts![index].intro),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => PostDetailScreeen(
+                            posts![index],
+                          ),
+                        ),
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: const  BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      child: Image.network(
+                        posts![index].image,
+                        fit: BoxFit.cover,
+                        height: MediaQuery.of(context).size.height * 0.2,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               itemCount: posts!.length,
